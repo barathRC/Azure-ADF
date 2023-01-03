@@ -1,0 +1,33 @@
+1) How to copy dimension file in parallel and fact table in sequence in a single pipeline using Azure ADF Copy activity
+https://github.com/barathRC/Azure-ADF
+2) You have N number of files in azure blob . How to pull specific date files using Azure ADF
+
+3) We have written a file with 10 columns . next time we receive the file with 20 columns to be written. how to append in databricks
+
+# Add the mergeSchema option
+loans.write.format("delta") \
+           .option("mergeSchema", "true") \
+           .mode("append") \
+           .save(DELTALAKE_SILVER_PATH)
+           
+MERGE INTO espresso AS t
+USING espresso_updates u 
+   ON u.espresso_id = t.espresso_id
+ WHEN MATCHED THEN
+      UPDATE SET *
+ WHEN NOT MATCHED THEN
+      INSERT *
+ 
+ 
+4) Keep first latest duplicates in dataframe
+      
+      Syntax: DataFrame.drop_duplicates(subset=None, keep=’first’, inplace=False)
+
+Parameters:
+
+subset: Subset takes a column or list of column label. It’s default value is none. After passing columns, it will consider them only for duplicates. 
+keep: keep is to control how to consider duplicate value. It has only three distinct value and default is ‘first’. 
+If ‘first‘, it considers first value as unique and rest of the same values as duplicate.
+If ‘last‘, it considers last value as unique and rest of the same values as duplicate.
+If False, it consider all of the same values as duplicates
+inplace: Boolean values, removes rows with duplicates if True.
