@@ -31,3 +31,21 @@ If ‘first‘, it considers first value as unique and rest of the same values a
 If ‘last‘, it considers last value as unique and rest of the same values as duplicate.
 If False, it consider all of the same values as duplicates
 inplace: Boolean values, removes rows with duplicates if True.
+
+
+
+5) Stored Procedure
+
+CREATE PROCEDURE GetDepartmentInfo 
+@DepartmentName AS VARCHAR(25)
+AS 
+SELECT DepartmentName , RecordDate ,AverageSalary
+FROM SampleDepartments WHERE DepartmentName=@DepartmentName
+
+
+DECLARE	@return_value int
+EXEC	@return_value = [dbo].[GetDepartmentInfo]
+        @DepartmentName = 'Human Resource'
+SELECT	'Return Value' = @return_value
+GO
+
